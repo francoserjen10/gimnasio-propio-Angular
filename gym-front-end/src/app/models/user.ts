@@ -7,6 +7,8 @@ export interface User {
     dni: number;
     email: string;
     password: string;
-    urlImage: string;
+    urlImage?: string;
     rolId?: number;
+    emergencyContact:string;
+    direction: string;
 }
