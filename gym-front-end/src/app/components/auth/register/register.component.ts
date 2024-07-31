@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgFor } from '@angular/common';
+import { RegisterService } from '../../../services/register.service';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +12,14 @@ import { NgFor } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export default class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) { }
+
+
+  ngOnInit(): void {
+    this.registerService.getAllUserService().subscribe(users => console.log("users", users));
+  }
 
   registerForm = this.formBuilder.group({
     name: ['', Validators.required],
@@ -22,10 +29,36 @@ export class RegisterComponent {
     dni: [null, Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
-    urlImage: [''],
+    emergencyContact: ['', Validators.required],
+    direction: ['', Validators.required]
   });
 
-  onSubmit() {
-    console.log(this.registerForm.value)
+  createUser() {
+    console.log(this.registerForm.value);
+    if (this.registerForm.valid) {
+      const user: User = {
+        name: this.registerForm.value.name!,
+        lastName: this.registerForm.value.lastName!,
+        phoneNumber: this.registerForm.value.phoneNumber!,
+        birthDate: this.registerForm.value.birthDate!,
+        dni: this.registerForm.value.dni!,
+        email: this.registerForm.value.email!,
+        password: this.registerForm.value.password!,
+        emergencyContact: this.registerForm.value.emergencyContact!,
+        direction: this.registerForm.value.direction!
+      }
+      this.registerService.createUserService(user).subscribe({
+        next: (createdUser) => {
+          console.log("Usuario creado con exito", createdUser);
+          alert("Usuario creado con exito!");
+        },
+        error: (error) => {
+          console.error("Error al crear usuario", error);
+          alert("Error al crear el usuario");
+        }
+      });
+    } else {
+      alert("Formulario invalido, por favor ingrese los datos nuevam")
+    }
   }
 }
