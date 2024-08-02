@@ -8,7 +8,7 @@ import { User } from '../../../models/user';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor],
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
