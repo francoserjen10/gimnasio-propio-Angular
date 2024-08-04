@@ -1,17 +1,18 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LogginService } from '../../../services/loggin.service';
 
 @Component({
   selector: 'app-loggin',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './loggin.component.html',
   styleUrl: './loggin.component.css'
 })
 export default class LogginComponent {
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private logginService: LogginService) { }
 
   logginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -26,8 +27,19 @@ export default class LogginComponent {
         email: this.logginForm.value.email!,
         password: this.logginForm.value.password!
       }
+      this.logginService.loggin(user.email, user.password).subscribe({
+        next: (loggedUser) => {
+          console.log("Inicio de sesion exitoso!", loggedUser);
+          alert("Inicio de sesion exitoso!");
+        },
+        error: (error) => {
+          console.error("El usuario no existe", error);
+          alert("El usuario no existe");
+        }
+      });
     } else {
-      alert('Error al iniciar sesion!!!')
+      this.logginForm.markAllAsTouched();
+      alert('Error al iniciar sesion!!!');
     }
   }
 }
