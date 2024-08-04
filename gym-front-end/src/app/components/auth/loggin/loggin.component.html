@@ -6,12 +6,65 @@
 
             <div class="container-input-label">
                 <label for="email">Email: </label>
-                <input type="email" id="email" formControlName="email">
+                <input 
+                type="email" 
+                id="email" 
+                formControlName="email" 
+                />
+
+               @if(logginForm.get('email')?.invalid && (logginForm.get('email')?.touched || (logginForm.get('email')?.dirty)) ) {
+
+                <div class="errorMesage">
+
+                    @if(logginForm.get('email')?.errors?.['required']) {
+                        <small>El email es requerido</small>
+                    }
+
+                    @if(logginForm.get('email')?.errors?.['email']) {
+                        <small>El email es incorrecto</small>
+                    }
+
+                </div>
+
+               }
+
+
+                <!-- <div *ngIf="logginForm.get('email')?.invalid && (logginForm.get('email')?.dirty || logginForm.get('email')?.touched)">
+                    <div class="errorMesage" *ngIf="logginForm.get('email')?.errors?.['required']">
+                        <small>El email es requerido</small>
+                    </div>
+                    <div class="errorMesage" *ngIf="logginForm.get('email')?.errors?.['email']">
+                        <small>Email inválido</small>
+                    </div>
+                </div> -->
+
             </div>
 
             <div class="container-input-label">
                 <label for="password1">Contraseña: </label>
-                <input type="password" id="password1" formControlName="password">
+                <input 
+                type="password" 
+                id="password1" 
+                formControlName="password"
+                />
+
+                @if(logginForm.get('password')?.invalid && logginForm.get('password')?.touched || logginForm.get('password')?.dirty) {
+                    <div class="errorMesage">
+
+                        @if(logginForm.get('password')?.errors?.['required']) {
+                            <small>Por favor ingrese la contraseña</small>
+                        }
+                        
+                        @if( logginForm.get('password')?.errors?.['minLength(5)'])  {
+                            <small>La contraseña debe tener al menos 5 caracteres</small>
+                        }
+
+                        @if( logginForm.get('password')?.errors?.['maxLength(15)'])  {
+                            <small>La contraseña es demasiado larga</small>
+                        }
+                        
+                    </div>
+                }
             </div>
 
             <div class="container-button">
