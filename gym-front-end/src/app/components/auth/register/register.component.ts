@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { RegisterService } from '../../../services/register.service';
 import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -58,7 +58,8 @@ export default class RegisterComponent implements OnInit {
         }
       });
     } else {
-      alert("Formulario invalido, por favor ingrese los datos nuevam")
+      this.registerForm.markAllAsTouched();
+      alert("Formulario invalido, por favor ingrese los datos nuevamente");
     }
   }
 }
