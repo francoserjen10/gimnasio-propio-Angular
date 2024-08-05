@@ -7,16 +7,33 @@
                         <div class="container-input-label">
                                 <label for="name">Nombre: </label>
                                 <input type="text" id="name" formControlName="name">
+                                @if(logginForm.get('name')?.invalid && logginForm.get('name')?.touched || logginForm.get('name')?.dirty) {
+                                        <div class="errorMesage">
+                    
+                                            @if(logginForm.get('name')?.errors?.['required']) {
+                                                <small>Por favor ingrese su nombre</small>
+                                            }
+                                        </div>
+                                    }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="lastName">Apellido: </label>
                                 <input type="text" id="lastName" formControlName="lastName">
+                                @if(logginForm.get('lastName')?.invalid && logginForm.get('lastName')?.touched || logginForm.get('lastName')?.dirty) {
+                                        <div class="errorMesage">
+                    
+                                            @if(logginForm.get('lastName')?.errors?.['required']) {
+                                                <small>Por favor ingrese su apellido</small>
+                                            }
+                                        </div>
+                                    }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="phoneNumber">Celular: </label>
                                 <input type="text" id="phoneNumber" formControlName="phoneNumber">
+                                
                         </div>
 
                         <div class="container-input-label">
