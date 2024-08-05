@@ -7,68 +7,179 @@
                         <div class="container-input-label">
                                 <label for="name">Nombre: </label>
                                 <input type="text" id="name" formControlName="name">
-                                @if(logginForm.get('name')?.invalid && logginForm.get('name')?.touched || logginForm.get('name')?.dirty) {
-                                        <div class="errorMesage">
-                    
-                                            @if(logginForm.get('name')?.errors?.['required']) {
-                                                <small>Por favor ingrese su nombre</small>
-                                            }
-                                        </div>
-                                    }
+
+                                @if(registerForm.get('name')?.invalid && registerForm.get('name')?.touched ||
+                                registerForm.get('name')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('name')?.errors?.['required']) {
+                                        <small>Por favor ingrese su nombre</small>
+                                        }
+                                </div>
+                                }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="lastName">Apellido: </label>
                                 <input type="text" id="lastName" formControlName="lastName">
-                                @if(logginForm.get('lastName')?.invalid && logginForm.get('lastName')?.touched || logginForm.get('lastName')?.dirty) {
-                                        <div class="errorMesage">
-                    
-                                            @if(logginForm.get('lastName')?.errors?.['required']) {
-                                                <small>Por favor ingrese su apellido</small>
-                                            }
-                                        </div>
-                                    }
+
+                                @if(registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched ||
+                                registerForm.get('lastName')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('lastName')?.errors?.['required']) {
+                                        <small>Por favor ingrese su apellido</small>
+                                        }
+                                </div>
+                                }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="phoneNumber">Celular: </label>
                                 <input type="text" id="phoneNumber" formControlName="phoneNumber">
-                                
+
+
+                                @if(registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched
+                                ||
+                                registerForm.get('phoneNumber')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('phoneNumber')?.errors?.['required']) {
+                                        <small>Por favor ingrese su número de teléfono</small>
+                                        }
+                                </div>
+                                }
+
                         </div>
 
                         <div class="container-input-label">
                                 <label for="birthDate">Fecha/Nac.: </label>
                                 <input type="date" id="birthDate" formControlName="birthDate">
+
+
+                                @if(registerForm.get('birthDate')?.invalid && registerForm.get('birthDate')?.touched ||
+                                registerForm.get('birthDate')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('birthDate')?.errors?.['required']) {
+                                        <small>Por favor ingrese su fecha de Nac.</small>
+                                        }
+                                </div>
+                                }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="dni">DNI: </label>
                                 <input type="number" id="dni" formControlName="dni">
+
+
+                                @if(registerForm.get('dni')?.invalid && registerForm.get('dni')?.touched ||
+                                registerForm.get('dni')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('dni')?.errors?.['required']) {
+                                        <small>Por favor ingrese su DNI</small>
+                                        }
+                                </div>
+                                }
                         </div>
 
+
+
+
+
+                        <!-- #TODO:
+                Hacer que me salga el error cuando hago click en el boton de crear -->
                         <div class="container-input-label">
                                 <label for="email">Email: </label>
                                 <input type="email" id="email" formControlName="email">
+
+                                @if(registerForm.get('email')?.invalid && registerForm.get('email')?.touched ||
+                                registerForm.get('email')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('email')?.errors?.['required']) {
+                                        <small>Por favor ingrese su Email</small>
+                                        }
+
+                                        @if(registerForm.get('email')?.errors?.['email']) {
+                                        <small>Email invalido</small>
+                                        }
+                                </div>
+                                }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="password1">Contraseña: </label>
                                 <input type="password" id="password1" formControlName="password">
+
+                                @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched ||
+                                registerForm.get('password')?.dirty) {
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('password')?.errors?.['required']) {
+                                        <small>Por favor ingrese la contraseña</small>
+                                        }
+
+                                        @if( registerForm.get('password')?.errors?.['minLength(5)']) {
+                                        <small>La contraseña debe tener al menos 5 caracteres</small>
+                                        }
+
+                                        @if( registerForm.get('password')?.errors?.['maxLength(15)']) {
+                                        <small>La contraseña es demasiado larga</small>
+                                        }
+
+                                </div>
+                                }
                         </div>
 
+                        <!-- #TODO: 
+                                        Ver como hacer el repit password-->
                         <div class="container-input-label">
                                 <label for="password2">Repita: </label>
                                 <input type="password" id="password2" formControlName="password">
                         </div>
 
+
+
+
                         <div class="container-input-label">
                                 <label for="emergencyContact">Contacto de emergencia: </label>
                                 <input type="text" id="emergencyContact" formControlName="emergencyContact">
+
+                                @if(registerForm.get('emergencyContact')?.invalid &&
+                                registerForm.get('emergencyContact')?.touched ||
+                                registerForm.get('emergencyContact')?.dirty) {
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('emergencyContact')?.errors?.['required']) {
+                                        <small>Por favor ingrese un contacto de emergencia</small>
+                                        }
+
+                                </div>
+                                }
                         </div>
 
                         <div class="container-input-label">
                                 <label for="direction">Dirección: </label>
                                 <input type="text" id="direction" formControlName="direction">
+
+                                @if(registerForm.get('direction')?.invalid && registerForm.get('direction')?.touched ||
+                                registerForm.get('direction')?.dirty) {
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('direction')?.errors?.['required']) {
+                                        <small>Por favor ingrese su dirección</small>
+                                        }
+
+                                </div>
+                                }
                         </div>
 
                         <div class="container-button">
