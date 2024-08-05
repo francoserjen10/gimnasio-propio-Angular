@@ -28,7 +28,8 @@ export default class RegisterComponent implements OnInit {
     birthDate: [null, Validators.required],
     dni: [null, Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+    password1: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+    password2: ['', Validators.required],
     emergencyContact: ['', Validators.required],
     direction: ['', Validators.required]
   });
@@ -43,7 +44,7 @@ export default class RegisterComponent implements OnInit {
         birthDate: this.registerForm.value.birthDate!,
         dni: this.registerForm.value.dni!,
         email: this.registerForm.value.email!,
-        password: this.registerForm.value.password!,
+        password: this.registerForm.value.password1!,
         emergencyContact: this.registerForm.value.emergencyContact!,
         direction: this.registerForm.value.direction!
       }
@@ -63,3 +64,5 @@ export default class RegisterComponent implements OnInit {
     }
   }
 }
+
+

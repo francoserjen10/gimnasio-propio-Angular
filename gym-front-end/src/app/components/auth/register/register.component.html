@@ -40,7 +40,6 @@
                                 <label for="phoneNumber">Celular: </label>
                                 <input type="text" id="phoneNumber" formControlName="phoneNumber">
 
-
                                 @if(registerForm.get('phoneNumber')?.invalid && registerForm.get('phoneNumber')?.touched
                                 ||
                                 registerForm.get('phoneNumber')?.dirty) {
@@ -59,8 +58,8 @@
                                 <label for="birthDate">Fecha/Nac.: </label>
                                 <input type="date" id="birthDate" formControlName="birthDate">
 
-
-                                @if(registerForm.get('birthDate')?.invalid && registerForm.get('birthDate')?.touched ||
+                                @if(registerForm.get('birthDate')?.invalid && registerForm.get('birthDate')?.touched
+                                ||
                                 registerForm.get('birthDate')?.dirty) {
 
                                 <div class="errorMesage">
@@ -76,7 +75,6 @@
                                 <label for="dni">DNI: </label>
                                 <input type="number" id="dni" formControlName="dni">
 
-
                                 @if(registerForm.get('dni')?.invalid && registerForm.get('dni')?.touched ||
                                 registerForm.get('dni')?.dirty) {
 
@@ -88,10 +86,6 @@
                                 </div>
                                 }
                         </div>
-
-
-
-
 
                         <!-- #TODO:
                 Hacer que me salga el error cuando hago click en el boton de crear -->
@@ -117,21 +111,21 @@
 
                         <div class="container-input-label">
                                 <label for="password1">Contraseña: </label>
-                                <input type="password" id="password1" formControlName="password">
+                                <input type="password" id="password1" formControlName="password1">
 
-                                @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched ||
-                                registerForm.get('password')?.dirty) {
+                                @if(registerForm.get('password1')?.invalid && registerForm.get('password1')?.touched ||
+                                registerForm.get('password1')?.dirty) {
                                 <div class="errorMesage">
 
-                                        @if(registerForm.get('password')?.errors?.['required']) {
+                                        @if(registerForm.get('password1')?.errors?.['required']) {
                                         <small>Por favor ingrese la contraseña</small>
                                         }
 
-                                        @if( registerForm.get('password')?.errors?.['minLength(5)']) {
+                                        @if( registerForm.get('password1')?.errors?.['minLength(5)']) {
                                         <small>La contraseña debe tener al menos 5 caracteres</small>
                                         }
 
-                                        @if( registerForm.get('password')?.errors?.['maxLength(15)']) {
+                                        @if( registerForm.get('password1')?.errors?.['maxLength(15)']) {
                                         <small>La contraseña es demasiado larga</small>
                                         }
 
@@ -143,11 +137,19 @@
                                         Ver como hacer el repit password-->
                         <div class="container-input-label">
                                 <label for="password2">Repita: </label>
-                                <input type="password" id="password2" formControlName="password">
+                                <input type="password" id="password2" formControlName="password2">
+
+                                @if(registerForm.get('password2')?.invalid && registerForm.get('password2')?.touched ||
+                                registerForm.get('password2')?.dirty) {
+
+                                <div class="errorMesage">
+
+                                        @if(registerForm.get('password1')?.errors?.['required']) {
+                                        <small>Por favor ingrese la contraseña</small>
+                                        }
+                                </div>
+                                }
                         </div>
-
-
-
 
                         <div class="container-input-label">
                                 <label for="emergencyContact">Contacto de emergencia: </label>
