@@ -2,11 +2,12 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogginService } from '../../../services/loggin.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-loggin',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './loggin.component.html',
   styleUrl: './loggin.component.css'
 })
