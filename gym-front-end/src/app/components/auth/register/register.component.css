@@ -1,81 +1,195 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
 .container {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-image: linear-gradient(to bottom right, rgb(0, 233, 241), rgb(248, 117, 248));
+    justify-content: center;
 }
 
-form {
-    background-color: white;
-    width: 50%;
-    max-width: 800px;
+/* -------------------------------------------------------RIGHT */
+.container-div-rigth {
+    width: 56%;
     min-width: 320px;
-    height: 70%;
+    height: 100vh;
+    min-height: 500px;
+}
+
+.container-div-rigth img {
+    width: 100%;
+    min-width: 320px;
+    height: 100vh;
+    min-height: 500px;
+    border-radius: 6px;
+}
+
+/* -------------------------------------------------------LEFT */
+.container-div-left {
+    width: 44%;
+    min-width: 320px;
+    height: 100vh;
     min-height: 500px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    border-radius: 4px;
+    overflow: hidden;
+    /* Evita que los elementos hijos se desborden */
+    box-sizing: border-box;
+    /* Asegura que el padding no expanda el tamaño del contenedor */
 }
 
-.container-form-group {
-    height: 100%;
+.container-form {
+    position: relative;
+    min-height: 400px;
     width: 100%;
-    max-width: 800px;
-    min-width: 320px;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 0px 15px;
+    background-color: #fff;
+}
+
+.container-form header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Se utiliza para darle un estilo a la raya de abajo del header(registrate) */
+.container-form header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: blue;
+}
+
+.container-form form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 530px;
+    overflow-y: scroll;
+    background-color: #fff;
+}
+
+.container form::-webkit-scrollbar {
+    display: none;
+}
+
+.container-form form .form {
+    position: absolute;
+    background-color: #fff;
+}
+
+.container-form form .fields {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-content: space-around;
-    margin: 0;
-    padding: 0;
 }
 
-.container-button {
+form .fields .input-field {
+    display: flex;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1%;
-    height: 10%;
-}
-
-.container-input-label {
-    display: flex;
     flex-direction: column;
-    width: 40%;
-    height: 12%;
-    margin: 5px 20px;
+    margin: 4px 0;
 }
 
-h2 {
-    margin: 15px 15px;
+.input-field label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+.input-field input {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+.input-field input:is(:focus, :valid) {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.input-field input[type="date"] {
+    color: #707070;
+}
+
+.input-field input[type="date"]:valid {
+    color: #333;
+}
+
+.container-form form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
     width: 100%;
-    font-size: 35px;
-    height: auto;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 25px 0;
+    background-color: #4070f4;
+    transition: all 0.3s linear;
+    cursor: pointer;
 }
 
-label {
-    font-size: 20px;
+.container-form form button {
+    font-size: 14px;
+    font-weight: 400;
 }
 
-input {
-    width: 100%;
-    height: 45%;
-    margin-top: 5px;
-    border-radius: 4px;
+.container-form form button:hover {
+    background-color: #265df2;
 }
 
-button {
-    height: 70%;
-    width: 90%;
-    background-image: linear-gradient(to bottom right, rgb(0, 233, 241), rgb(248, 117, 248));
-    border-radius: 4px;
+.container-form form .buttons {
+    display: flex;
+    align-items: center;
+}
+
+.container-form form .buttons button,
+btnText {
+    margin-right: 14px;
+}
+
+@media (max-width: 750px) {
+    .container-div-rigth img {
+        display: none;
+    }
+
+    .container-div-rigth {
+        display: none;
+    }
+
+    .container-div-left {
+        width: 100%;
+    }
+
+    .container form {
+        overflow-y: scroll;
+    }
+
+    .container form::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    form .fields .input-field {
+        /* Funcion de css que hace el calculo para determinar le ancho */
+        width: calc(100% / 2 - 15px);
+    }
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field {
+        width: 100%;
+    }
 }
