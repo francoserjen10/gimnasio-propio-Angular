@@ -4,11 +4,12 @@ import { Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { RegisterService } from '../../../services/register.service';
 import { User } from '../../../models/user';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -18,7 +19,7 @@ export default class RegisterComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.registerService.getAllUserService().subscribe(users => console.log("users", users));
+    // this.registerService.getAllUserService().subscribe(users => console.log("users", users));
   }
 
   registerForm = this.formBuilder.group({
