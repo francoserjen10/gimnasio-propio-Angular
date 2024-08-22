@@ -129,7 +129,7 @@ form .fields .input-field {
     align-items: center;
     justify-content: center;
     height: 45px;
-    max-width: 200px;
+    max-width: 250px;
     width: 100%;
     border: none;
     outline: none;
@@ -139,9 +139,6 @@ form .fields .input-field {
     background-color: #4070f4;
     transition: all 0.3s linear;
     cursor: pointer;
-}
-
-.container-form form button {
     font-size: 14px;
     font-weight: 400;
 }
@@ -150,14 +147,22 @@ form .fields .input-field {
     background-color: #265df2;
 }
 
-.container-form form .buttons {
-    display: flex;
-    align-items: center;
+.container-form form a {
+    color: #4070f4;
+    text-decoration: none;
+    transition: all 0.3s linear;
+    cursor: pointer;
 }
 
-.container-form form .buttons button,
-btnText {
-    margin-right: 14px;
+.container-form form a:hover {
+    color: #0044ff;
+    font-size: 17px;
+}
+
+.container-form form .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 @media (max-width: 750px) {
@@ -180,6 +185,7 @@ btnText {
     .container form::-webkit-scrollbar {
         display: none;
     }
+
 
 
     form .fields .input-field {
