@@ -92,8 +92,13 @@ input {
     max-height: 35px;
     margin-top: 5px;
     border-radius: 4px;
+    margin: 8px 0;
 }
 
+.errorMesage {
+    color: red;
+    font-size: 14px;
+}
 
 .container-button {
     width: 100%;
