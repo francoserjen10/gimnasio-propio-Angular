@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { RegisterService } from '../../../services/register.service';
 import { User } from '../../../models/user';
 import { RouterLink } from '@angular/router';
+import { CustomValidators } from '../../../validators/custom-validators.none';
 
 @Component({
   selector: 'app-register',
@@ -35,29 +36,9 @@ export default class RegisterComponent implements OnInit {
     direction: ['', Validators.required]
   },
     {
-      validators: this.passwordMarchValidator('password1', 'password2')
+      validators: CustomValidators.passwordMatchValidator('password1', 'password2')
     }
   );
-
-  // Validador personalizado para la comparacion de las contraseñas
-  passwordMarchValidator(firstNameControl: string, secondNameControl: string): ValidatorFn {
-    return (group: AbstractControl): ValidationErrors | null => {
-
-      const firsControl = group.get('password1');
-      console.log("Validador custom `firsControl`", firsControl)
-
-      const secondControl = group.get('password2');
-      console.log("Validador custom `secondControl`", secondControl)
-
-      return firsControl?.value === secondControl?.value ? null : { passwordMismatch: true };
-    }
-  }
-
-  buttonPrueba() {
-    console.log("Boton de prueba")
-    const { password2, password1 } = this.registerForm.value
-    console.log("passwords", password1, password2)
-  }
 
   createUser() {
     console.log(this.registerForm.value);
