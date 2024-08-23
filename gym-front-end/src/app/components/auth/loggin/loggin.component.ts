@@ -31,6 +31,7 @@ export default class LogginComponent {
       this.logginService.loggin(user.email, user.password).subscribe({
         next: (loggedUser) => {
           console.log("Inicio de sesion exitoso!", loggedUser);
+          this.logginForm.reset();
           alert("Inicio de sesion exitoso!");
         },
         error: (error) => {
