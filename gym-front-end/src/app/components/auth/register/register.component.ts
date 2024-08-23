@@ -58,6 +58,7 @@ export default class RegisterComponent implements OnInit {
       this.registerService.createUserService(user).subscribe({
         next: (createdUser) => {
           console.log("Usuario creado con exito", createdUser);
+          this.registerForm.reset();
           alert("Usuario creado con exito!");
         },
         error: (error) => {
