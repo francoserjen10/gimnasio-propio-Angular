@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { RegisterService } from '../../../services/register.service';
 import { User } from '../../../models/user';
 import { RouterLink } from '@angular/router';
+import { CustomValidators } from '../../../validators/custom-validators.none';
 
 @Component({
   selector: 'app-register',
@@ -33,11 +34,16 @@ export default class RegisterComponent implements OnInit {
     password2: ['', Validators.required],
     emergencyContact: ['', Validators.required],
     direction: ['', Validators.required]
-  });
+  },
+    {
+      validators: CustomValidators.passwordMatchValidator('password1', 'password2')
+    }
+  );
 
   createUser() {
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
+
       const user: User = {
         name: this.registerForm.value.name!,
         lastName: this.registerForm.value.lastName!,
