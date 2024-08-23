@@ -6,6 +6,7 @@ import { RegisterService } from '../../../services/register.service';
 import { User } from '../../../models/user';
 import { RouterLink } from '@angular/router';
 import { CustomValidators } from '../../../validators/custom-validators.none';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ import { CustomValidators } from '../../../validators/custom-validators.none';
 })
 export default class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService) { }
+  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -60,6 +61,7 @@ export default class RegisterComponent implements OnInit {
           console.log("Usuario creado con exito", createdUser);
           this.registerForm.reset();
           alert("Usuario creado con exito!");
+          this.router.navigate(['/loggin']);
         },
         error: (error) => {
           console.error("Error al crear usuario", error);
