@@ -7,7 +7,7 @@
 
                         <header>Registrate</header>
 
-                        <form [formGroup]="registerForm">
+                        <form [formGroup]="registerForm" (ngSubmit)="createUser()">
 
                                 <div class="form register">
 
@@ -185,9 +185,14 @@
 
                                                         <div class="errorMesage">
 
-                                                                @if(registerForm.get('password1')?.errors?.['required'])
+                                                                @if(registerForm.get('password2')?.errors?.['required'])
                                                                 {
                                                                 <small>Por favor ingrese la contraseña</small>
+                                                                }
+
+                                                                @if(registerForm.getError('passwordMismatch'))
+                                                                {
+                                                                <small>La contraseña no coincide</small>
                                                                 }
                                                         </div>
                                                         }
@@ -237,13 +242,12 @@
                                         </div>
                                         <div class="buttons">
 
-                                                <button type="button" (click)="createUser()">Crear</button>
+                                                <button type="submit">Crear</button>
 
                                                 <a routerLink="/loggin">¿Ya tenes cuenta?</a>
-                                                
+
                                         </div>
                                 </div>
-
                         </form>
 
                 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { RegisterService } from '../../../services/register.service';
@@ -33,11 +33,36 @@ export default class RegisterComponent implements OnInit {
     password2: ['', Validators.required],
     emergencyContact: ['', Validators.required],
     direction: ['', Validators.required]
-  });
+  },
+    {
+      validators: this.passwordMarchValidator('password1', 'password2')
+    }
+  );
+
+  // Validador personalizado para la comparacion de las contraseñas
+  passwordMarchValidator(firstNameControl: string, secondNameControl: string): ValidatorFn {
+    return (group: AbstractControl): ValidationErrors | null => {
+
+      const firsControl = group.get('password1');
+      console.log("Validador custom `firsControl`", firsControl)
+
+      const secondControl = group.get('password2');
+      console.log("Validador custom `secondControl`", secondControl)
+
+      return firsControl?.value === secondControl?.value ? null : { passwordMismatch: true };
+    }
+  }
+
+  buttonPrueba() {
+    console.log("Boton de prueba")
+    const { password2, password1 } = this.registerForm.value
+    console.log("passwords", password1, password2)
+  }
 
   createUser() {
     console.log(this.registerForm.value);
     if (this.registerForm.valid) {
+
       const user: User = {
         name: this.registerForm.value.name!,
         lastName: this.registerForm.value.lastName!,
