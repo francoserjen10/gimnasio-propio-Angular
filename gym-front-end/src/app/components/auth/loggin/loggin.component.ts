@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LogginService } from '../../../services/loggin.service';
+import { AuthService } from '../../../services/auth.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 })
 export default class LogginComponent {
 
-  constructor(private formBuilder: FormBuilder, private logginService: LogginService) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   logginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -28,7 +28,7 @@ export default class LogginComponent {
         email: this.logginForm.value.email!,
         password: this.logginForm.value.password!
       }
-      this.logginService.loggin(user.email, user.password).subscribe({
+      this.authService.loggin(user.email, user.password).subscribe({
         next: (loggedUser) => {
           console.log("Inicio de sesion exitoso!", loggedUser);
           this.logginForm.reset();

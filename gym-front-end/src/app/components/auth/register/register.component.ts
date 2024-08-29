@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { RegisterService } from '../../../services/register.service';
+import { CommonService } from '../../../services/common.service';
 import { User } from '../../../models/user';
 import { RouterLink } from '@angular/router';
 import { CustomValidators } from '../../../validators/custom-validators.none';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,11 +18,11 @@ import { Router } from '@angular/router';
 })
 export default class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private registerService: RegisterService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
 
   ngOnInit(): void {
-    // this.registerService.getAllUserService().subscribe(users => console.log("users", users));
+    // this.authService.getAllUserService().subscribe(users => console.log("users", users));
   }
 
   registerForm = this.formBuilder.group({
@@ -56,7 +57,7 @@ export default class RegisterComponent implements OnInit {
         emergencyContact: this.registerForm.value.emergencyContact!,
         direction: this.registerForm.value.direction!
       }
-      this.registerService.createUserService(user).subscribe({
+      this.authService.createUserService(user).subscribe({
         next: (createdUser) => {
           console.log("Usuario creado con exito", createdUser);
           this.registerForm.reset();
