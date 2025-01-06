@@ -21,16 +21,13 @@ export default class LogginComponent {
   });
 
   logginUser() {
-    console.log(this.logginForm.value);
     if (this.logginForm.valid) {
-      console.log("cmidancdkanl")
       const user = {
         email: this.logginForm.value.email!,
         password: this.logginForm.value.password!
       }
       this.authService.loggin(user.email, user.password).subscribe({
         next: (loggedUser) => {
-          console.log("Inicio de sesion exitoso!", loggedUser);
           this.logginForm.reset();
           alert("Inicio de sesion exitoso!");
         },
