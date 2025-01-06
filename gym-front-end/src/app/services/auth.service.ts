@@ -12,10 +12,9 @@ export class AuthService {
   constructor(private commonService: CommonService, private http: HttpClient) { }
 
   loggin(email: string, password: string) {
-    const result = this.http.post(`${this.commonService.apiUrl}/login/access`, { email, password }, {
+    return this.http.post(`${this.commonService.apiUrl}/login/access`, { email, password }, {
       headers: { 'Content-Type': 'application/json' }
     })
-    return result;
   }
 
   getAllUserService(): Observable<User[]> {
