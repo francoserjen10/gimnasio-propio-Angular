@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { CommonService } from './common.service';
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,32 @@ export class AuthService {
 
   constructor(private commonService: CommonService, private http: HttpClient) { }
 
-  loggin(email: string, password: string) {
-    return this.http.post(`${this.commonService.apiUrl}/login/access`, { email, password }, {
-      headers: { 'Content-Type': 'application/json' }
-    })
+  loggin(email: string, password: string): Observable<{ accessToken: string }> {
+    return this.http.post<{ accessToken: string }>(
+      `${this.commonService.apiUrl}/login/access`,
+      { email, password },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+  }
+
+  getRolesOfToken(): number | null {
+    const token = Cookies.get('token');
+    if (token) {
+      const decodedToken: User = jwtDecode<User>(token);
+      return decodedToken.rolId ?? null;
+    }
+    return null;
+  }
+
+  saveToken(token: string): string | undefined {
+    const tokens = Cookies.set('token', token, {
+      HttpOnly: true,
+      FsameSite: 'strict',
+      expires: 1 //va a expirar en 1 dia
+    });
+    return tokens
   }
 
   getAllUserService(): Observable<User[]> {
