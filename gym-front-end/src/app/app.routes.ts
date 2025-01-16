@@ -13,6 +13,12 @@ export const routes: Routes = [
         path: 'admin',
         loadComponent: () => import('./components/admin/home/home.component'),
         canActivate: [authGuard],
-        data: { roles: [1] }
+        data: { roles: [1] } // Solo Administradores
+    },
+    {
+        path: 'cliente',
+        loadComponent: () => import('./components/client/home/home.component'),
+        canActivate: [authGuard],
+        data: { roles: [2] }  //Solo Clientes
     },
 ];

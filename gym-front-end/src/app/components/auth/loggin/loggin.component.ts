@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
@@ -28,10 +28,9 @@ export default class LogginComponent {
       }
       this.authService.loggin(user.email, user.password).subscribe({
         next: (loggedUser) => {
-          const token: string = loggedUser?.accessToken;
-          this.authService.saveToken(token);
-          const userRole: number | null = this.authService.getRolesOfToken();
-          this.redirectUser(userRole!);
+          if (loggedUser !== null) {
+            this.getRolesOfToken();
+          }
         },
         error: (error) => {
           console.error("El usuario no existe", error);
@@ -44,6 +43,19 @@ export default class LogginComponent {
     }
   }
 
+  getRolesOfToken() {
+    this.authService.getRolesOfToken().subscribe({
+      next: (userRole) => {
+        if (userRole !== null) {
+          this.redirectUser(userRole!);
+        }
+      },
+      error: (error) => {
+        console.error('Error al obtener el rol del usuario:', error);
+      }
+    })
+  }
+
   redirectUser(rolId: number) {
     if (rolId === 1) {
       this.logginForm.reset();
@@ -52,7 +64,7 @@ export default class LogginComponent {
     } else if (rolId === 2) {
       this.logginForm.reset();
       alert("Inicio de sesion exitoso!");
-      // this.router.navigate(['/user']);
+      this.router.navigate(['/user']);
     } else {
       alert("El usuario no tiene un rol asignado");
       // this.router.navigate(['/not-found']); // redireccionar a pagina de error

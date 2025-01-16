@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { CommonService } from './common.service';
-import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 
 @Injectable({
@@ -18,27 +17,21 @@ export class AuthService {
       `${this.commonService.apiUrl}/login/access`,
       { email, password },
       {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        responseType: 'json',
+        withCredentials: true
       }
     );
   }
 
-  getRolesOfToken(): number | null {
-    const token = Cookies.get('token');
-    if (token) {
-      const decodedToken: User = jwtDecode<User>(token);
-      return decodedToken.rolId ?? null;
-    }
-    return null;
-  }
-
-  saveToken(token: string): string | undefined {
-    const tokens = Cookies.set('token', token, {
-      HttpOnly: true,
-      FsameSite: 'strict',
-      expires: 1 //va a expirar en 1 dia
-    });
-    return tokens
+  getRolesOfToken(): Observable<number | null> {
+    return this.http.get<{ rolId: number } | null>(`${this.commonService.apiUrl}/login/user-role`,
+      {
+        withCredentials: true
+      }
+    ).pipe(
+      map(response => response?.rolId ?? null)
+    );
   }
 
   getAllUserService(): Observable<User[]> {
@@ -49,7 +42,6 @@ export class AuthService {
     const result = this.http.post<User>(`${this.commonService.apiUrl}/register/create-user`, user, {
       headers: { 'Content-Type': 'application/json' }
     })
-    console.log("createUserService", result)
     return result;
   }
 }
