@@ -11,8 +11,9 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (userRole !== null) {
         if (userRole === 1) {
           return true;
-        } else {
-          return false;
+        }
+        if (userRole === 2) {
+          return true;
         }
       }
       return false;

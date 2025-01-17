@@ -64,7 +64,7 @@ export default class LogginComponent {
     } else if (rolId === 2) {
       this.logginForm.reset();
       alert("Inicio de sesion exitoso!");
-      this.router.navigate(['/user']);
+      this.router.navigate(['/client']);
     } else {
       alert("El usuario no tiene un rol asignado");
       // this.router.navigate(['/not-found']); // redireccionar a pagina de error
